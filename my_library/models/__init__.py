@@ -1,0 +1,1 @@
+from my_library.models.academic_paper_classifier import AcademicPaperClassifier
