@@ -34,16 +34,15 @@
       "input_dim": 400,
       "num_layers": 2,
       "hidden_dims": [200, 3],
-      "activations": "linear",
+      "activations": ["relu", "linear"],
       "dropout": [0.2, 0.0]
     }
-   },
+  },
   "iterator": {
     "type": "bucket",
     "sorting_keys": [["abstract", "num_tokens"], ["title", "num_tokens"]],
     "batch_size": 64
   },
-
   "trainer": {
     "num_epochs": 40,
     "patience": 10,

@@ -21,6 +21,11 @@ class AcademicPaperClassifier(Model):
     This ``Model`` performs text classification for an academic paper.  We assume we're given a
     title and an abstract, and we predict some output label.
 
+    The basic model structure: we'll embed the title and the abstract, and encode each of them with
+    separate Seq2VecEncoders, getting a single vector representing the content of each.  We'll then
+    concatenate those two vectors, and pass the result through a feedforward network, the output of
+    which we'll use as our scores for each label.
+
     Parameters
     ----------
     vocab : ``Vocabulary``, required
@@ -104,10 +109,7 @@ class AcademicPaperClassifier(Model):
         encoded_abstract = self.abstract_encoder(embedded_abstract, abstract_mask)
 
         logits = self.classifier_feedforward(torch.cat([encoded_title, encoded_abstract], dim=-1))
-        class_probabilities = F.softmax(logits)
-
-        output_dict = {"class_probabilities": class_probabilities}
-
+        output_dict = {'logits': logits}
         if label is not None:
             loss = self.loss(logits, label.squeeze(-1))
             for metric in self.metrics.values():
@@ -122,7 +124,10 @@ class AcademicPaperClassifier(Model):
         Does a simple argmax over the class probabilities, converts indices to string labels, and
         adds a ``"label"`` key to the dictionary with the result.
         """
-        predictions = output_dict['class_probabilities'].cpu().data.numpy()
+        class_probabilities = F.softmax(output_dict['logits'])
+        output_dict['class_probabilities'] = class_probabilities
+
+        predictions = class_probabilities.cpu().data.numpy()
         argmax_indices = numpy.argmax(predictions, axis=-1)
         labels = [self.vocab.get_token_from_index(x, namespace="labels")
                   for x in argmax_indices]

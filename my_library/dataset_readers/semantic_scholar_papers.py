@@ -17,8 +17,6 @@ from allennlp.data.token_indexers import TokenIndexer, SingleIdTokenIndexer
 
 logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
 
-START_SYMBOL = "@@START@@"
-END_SYMBOL = "@@END@@"
 
 @DatasetReader.register("s2_papers")
 class SemanticScholarDatasetReader(DatasetReader):

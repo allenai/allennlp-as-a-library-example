@@ -17,6 +17,7 @@ class TestSemanticScholarDatasetReader(AllenNlpTestCase):
         instance2 = {"title": ["GRASPER", ":", "A", "Permissive", "Planning", "Robot"],
                      "abstract": ["Execut", "ion", "of", "classical", "plans"],
                      "venue": "AI"}
+
         instance3 = {"title": ["Route", "Planning", "under", "Uncertainty", ":", "The", "Canadian",
                                "Traveller", "Problem"],
                      "abstract": ["The", "Canadian", "Traveller", "problem", "is"],

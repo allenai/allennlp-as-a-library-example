@@ -2,31 +2,30 @@
   "dataset_reader": {
     "type": "s2_papers"
   },
-  "train_data_path": "tests/fixtures/s2_papers.jsonl",
-  "validation_data_path": "tests/fixtures/s2_papers.jsonl",
+  "train_data_path": "/s2_papers/train_sample.jsonl",
+  "validation_data_path": "/s2_papers/dev_sample.jsonl",
   "model": {
     "type": "paper_classifier",
     "text_field_embedder": {
       "tokens": {
         "type": "embedding",
-        "embedding_dim": 2,
+        "pretrained_file": "https://s3-us-west-2.amazonaws.com/allennlp/datasets/glove/glove.6B.100d.txt.gz",
+        "embedding_dim": 100,
         "trainable": false
       }
     },
     "title_encoder": {
       "type": "boe",
-      "embedding_dim": 2,
-      "averaged": true
+      "embedding_dim": 100
     },
     "abstract_encoder": {
       "type": "boe",
-      "embedding_dim": 2,
-      "averaged": true
+      "embedding_dim": 100
     },
     "classifier_feedforward": {
-      "input_dim": 4,
+      "input_dim": 200,
       "num_layers": 2,
-      "hidden_dims": [2, 3],
+      "hidden_dims": [200, 3],
       "activations": ["relu", "linear"],
       "dropout": [0.2, 0.0]
     }
@@ -34,16 +33,15 @@
   "iterator": {
     "type": "bucket",
     "sorting_keys": [["abstract", "num_tokens"], ["title", "num_tokens"]],
-    "padding_noise": 0.0,
     "batch_size": 64
   },
 
   "trainer": {
-    "num_epochs": 1,
-    "cuda_device": -1,
+    "num_epochs": 40,
+    "patience": 10,
+    "cuda_device": 0,
     "grad_clipping": 5.0,
     "validation_metric": "+accuracy",
-    "no_tqdm": true,
     "optimizer": {
       "type": "adagrad"
     }
