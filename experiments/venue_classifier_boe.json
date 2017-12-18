@@ -2,8 +2,8 @@
   "dataset_reader": {
     "type": "s2_papers"
   },
-  "train_data_path": "/s2_papers/train_sample.jsonl",
-  "validation_data_path": "/s2_papers/dev_sample.jsonl",
+  "train_data_path": "https://s3-us-west-2.amazonaws.com/allennlp/datasets/academic-papers-example/train.jsonl",
+  "validation_data_path": "https://s3-us-west-2.amazonaws.com/allennlp/datasets/academic-papers-example/dev.jsonl",
   "model": {
     "type": "paper_classifier",
     "text_field_embedder": {

@@ -8,6 +8,7 @@ import tqdm
 
 from allennlp.common import Params
 from allennlp.common.checks import ConfigurationError
+from allennlp.common.file_utils import cached_path
 from allennlp.data.dataset import Dataset
 from allennlp.data.dataset_readers.dataset_reader import DatasetReader
 from allennlp.data.fields import LabelField, TextField
@@ -53,7 +54,7 @@ class SemanticScholarDatasetReader(DatasetReader):
     @overrides
     def read(self, file_path):
         instances = []
-        with open(file_path, "r") as data_file:
+        with open(cached_path(file_path), "r") as data_file:
             logger.info("Reading instances from lines in file at: %s", file_path)
             for line_num, line in enumerate(tqdm.tqdm(data_file.readlines())):
                 line = line.strip("\n")

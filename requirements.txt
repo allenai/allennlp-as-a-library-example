@@ -1,1 +1,1 @@
-git+git://github.com/allenai/allennlp@3c761ba9d857677efb60ae5c2dbbe321f0b3b702
+allennlp==0.3
