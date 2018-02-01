@@ -7,13 +7,11 @@ from overrides import overrides
 import tqdm
 
 from allennlp.common import Params
-from allennlp.common.checks import ConfigurationError
 from allennlp.common.file_utils import cached_path
-from allennlp.data.dataset import Dataset
 from allennlp.data.dataset_readers.dataset_reader import DatasetReader
 from allennlp.data.fields import LabelField, TextField
 from allennlp.data.instance import Instance
-from allennlp.data.tokenizers import Token, Tokenizer, WordTokenizer
+from allennlp.data.tokenizers import Tokenizer, WordTokenizer
 from allennlp.data.token_indexers import TokenIndexer, SingleIdTokenIndexer
 
 logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
@@ -48,12 +46,12 @@ class SemanticScholarDatasetReader(DatasetReader):
     def __init__(self,
                  tokenizer: Tokenizer = None,
                  token_indexers: Dict[str, TokenIndexer] = None) -> None:
+        super().__init__()
         self._tokenizer = tokenizer or WordTokenizer()
         self._token_indexers = token_indexers or {"tokens": SingleIdTokenIndexer()}
 
     @overrides
-    def read(self, file_path):
-        instances = []
+    def _read(self, file_path):
         with open(cached_path(file_path), "r") as data_file:
             logger.info("Reading instances from lines in file at: %s", file_path)
             for line_num, line in enumerate(tqdm.tqdm(data_file.readlines())):
@@ -64,10 +62,7 @@ class SemanticScholarDatasetReader(DatasetReader):
                 title = paper_json['title']
                 abstract = paper_json['paperAbstract']
                 venue = paper_json['venue']
-                instances.append(self.text_to_instance(title, abstract, venue))
-        if not instances:
-            raise ConfigurationError("No instances read!")
-        return Dataset(instances)
+                yield self.text_to_instance(title, abstract, venue)
 
     @overrides
     def text_to_instance(self, title: str, abstract: str, venue: str = None) -> Instance:  # type: ignore
