@@ -36,6 +36,10 @@ class SemanticScholarDatasetReader(DatasetReader):
 
     Parameters
     ----------
+    lazy : ``bool`` (optional, default=False)
+        Passed to ``DatasetReader``.  If this is ``True``, training will start sooner, but will
+        take longer per batch.  This also allows training with datasets that are too large to fit
+        in memory.
     tokenizer : ``Tokenizer``, optional
         Tokenizer to use to split the title and abstrct into words or other kinds of tokens.
         Defaults to ``WordTokenizer()``.
@@ -44,9 +48,10 @@ class SemanticScholarDatasetReader(DatasetReader):
         SingleIdTokenIndexer()}``.
     """
     def __init__(self,
+                 lazy: bool = False,
                  tokenizer: Tokenizer = None,
                  token_indexers: Dict[str, TokenIndexer] = None) -> None:
-        super().__init__()
+        super().__init__(lazy)
         self._tokenizer = tokenizer or WordTokenizer()
         self._token_indexers = token_indexers or {"tokens": SingleIdTokenIndexer()}
 
@@ -78,7 +83,8 @@ class SemanticScholarDatasetReader(DatasetReader):
 
     @classmethod
     def from_params(cls, params: Params) -> 'SemanticScholarDatasetReader':
+        lazy = params.pop('lazy', False)
         tokenizer = Tokenizer.from_params(params.pop('tokenizer', {}))
         token_indexers = TokenIndexer.dict_from_params(params.pop('token_indexers', {}))
         params.assert_empty(cls.__name__)
-        return cls(tokenizer=tokenizer, token_indexers=token_indexers)
+        return cls(lazy=lazy, tokenizer=tokenizer, token_indexers=token_indexers)
