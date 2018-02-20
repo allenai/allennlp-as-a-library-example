@@ -14,7 +14,7 @@ To train this model, after setting up your development environment by installing
 `pytorch==0.3`, and `spacy>=2.0`, you run:
 
 ```bash
-python run.py train experiments/venue_classifier.json -s /tmp/your_output_dir_here
+python -m allennlp.run train experiments/venue_classifier.json -s /tmp/your_output_dir_here --include-package my_library
 ```
 
 This example was written by the AllenNLP team.  You can see a similar example repository written
