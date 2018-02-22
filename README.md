@@ -10,8 +10,8 @@ to classify the papers given some label (which we specified as the paper's venue
 `DatasetReader`).  Finally, we added a script to use AllenNLP's training commands from a
 third-party repository, and an experiment configuration for running a real model on real data.
 
-To train this model, after setting up your development environment by installing `allennlp==0.3`,
-`pytorch==0.3`, and `spacy>=2.0`, you run:
+To train this model, after setting up your development environment by installing `allennlp==0.4`,
+`pytorch==0.3.1`, and `spacy>=2.0`, you run:
 
 ```bash
 python -m allennlp.run train experiments/venue_classifier.json -s /tmp/your_output_dir_here --include-package my_library
