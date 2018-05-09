@@ -59,7 +59,7 @@ class SemanticScholarDatasetReader(DatasetReader):
     def _read(self, file_path):
         with open(cached_path(file_path), "r") as data_file:
             logger.info("Reading instances from lines in file at: %s", file_path)
-            for line_num, line in enumerate(tqdm.tqdm(data_file.readlines())):
+            for line in data_file:
                 line = line.strip("\n")
                 if not line:
                     continue
