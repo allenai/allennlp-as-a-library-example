@@ -100,21 +100,26 @@ class AcademicPaperClassifier(Model):
         loss : torch.FloatTensor, optional
             A scalar loss to be optimised.
         """
-        embedded_title = self.text_field_embedder(title)
-        title_mask = util.get_text_field_mask(title)
-        encoded_title = self.title_encoder(embedded_title, title_mask)
+        # TODO: embed + get mask + encode title
+        # things that might be useful:
+        #    * self.text_field_embedder
+        #    * util.get_text_field_mask
+        #    * self.title_encoder
 
-        embedded_abstract = self.text_field_embedder(abstract)
-        abstract_mask = util.get_text_field_mask(abstract)
-        encoded_abstract = self.abstract_encoder(embedded_abstract, abstract_mask)
+        # TODO: embed + get mask + encode abstact
 
-        logits = self.classifier_feedforward(torch.cat([encoded_title, encoded_abstract], dim=-1))
-        output_dict = {'logits': logits}
-        if label is not None:
-            loss = self.loss(logits, label.squeeze(-1))
-            for metric in self.metrics.values():
-                metric(logits, label.squeeze(-1))
-            output_dict["loss"] = loss
+        # TODO: concatenate encodings and feedforward to get logits, put them in output dict
+        # things that might be useful:
+        #    * torch.cat
+        #    * self.classifier_feedforward
+
+        # TODO: if label specified, compute loss and add it to output_dict
+        # things that might be useful:
+        #    * self.loss
+
+        # TODO: if label specified, update metrics
+        # things that might be useful:
+        #    * self.metrics
 
         return output_dict
 

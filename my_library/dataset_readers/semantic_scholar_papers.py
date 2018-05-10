@@ -55,32 +55,20 @@ class SemanticScholarDatasetReader(DatasetReader):
 
     @overrides
     def _read(self, file_path):
-        raise NotImplementedError
-        # with open(cached_path(file_path), "r") as data_file:
-        #     logger.info("Reading instances from lines in file at: %s", file_path)
-        #     for line in data_file:
-        #         line = line.strip("\n")
-        #         if not line:
-        #             continue
-        #         paper_json = json.loads(line)
-        #         title = paper_json['title']
-        #         abstract = paper_json['paperAbstract']
-        #         venue = paper_json['venue']
-        #         yield self.text_to_instance(title, abstract, venue)
+        with open(cached_path(file_path), "r") as data_file:
+            logger.info("Reading instances from lines in file at: %s", file_path)
+            for line in data_file:
+                # TODO: Create and yield an Instance
+                raise NotImplementedError
 
     @overrides
     def text_to_instance(self, title: str, abstract: str, venue: str = None) -> Instance:  # type: ignore
         # pylint: disable=arguments-differ
-        raise NotImplementedError
+        tokenized_title = self._tokenizer.tokenize(title)
+        tokenized_abstract = self._tokenizer.tokenize(abstract)
 
-        # tokenized_title = self._tokenizer.tokenize(title)
-        # tokenized_abstract = self._tokenizer.tokenize(abstract)
-        # title_field = TextField(tokenized_title, self._token_indexers)
-        # abstract_field = TextField(tokenized_abstract, self._token_indexers)
-        # fields = {'title': title_field, 'abstract': abstract_field}
-        # if venue is not None:
-        #     fields['label'] = LabelField(venue)
-        # return Instance(fields)
+        # TODO: create the Instance:
+        raise NotImplementedError
 
     @classmethod
     def from_params(cls, params: Params) -> 'SemanticScholarDatasetReader':
