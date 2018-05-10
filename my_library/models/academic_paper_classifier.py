@@ -104,22 +104,24 @@ class AcademicPaperClassifier(Model):
         # things that might be useful:
         #    * self.text_field_embedder
         #    * util.get_text_field_mask
-        #    * self.title_encoder
+        #    * self.title_encoder (which takes a tensor and a mask)
 
         # TODO: embed + get mask + encode abstact
 
         # TODO: concatenate encodings and feedforward to get logits, put them in output dict
         # things that might be useful:
-        #    * torch.cat
+        #    * torch.cat (make sure to specify which dim to cat along)
         #    * self.classifier_feedforward
 
         # TODO: if label specified, compute loss and add it to output_dict
         # things that might be useful:
-        #    * self.loss
+        #    * tensor.squeeze()  [the labels have dimension (batch_size, 1)]
+        #    * self.loss (takes logits and labels)
 
         # TODO: if label specified, update metrics
         # things that might be useful:
-        #    * self.metrics
+        #    * tensor.squeeze
+        #    * self.metrics (each one takes logits and labels)
 
         return output_dict
 
@@ -129,14 +131,18 @@ class AcademicPaperClassifier(Model):
         Does a simple argmax over the class probabilities, converts indices to string labels, and
         adds a ``"label"`` key to the dictionary with the result.
         """
-        class_probabilities = F.softmax(output_dict['logits'], dim=-1)
-        output_dict['class_probabilities'] = class_probabilities
+        # TODO: compute class probabilities
+        # things that might be useful:
+        #    * F.softmax (make sure to specify which dim to softmax along)
 
-        predictions = class_probabilities.cpu().data.numpy()
-        argmax_indices = numpy.argmax(predictions, axis=-1)
-        labels = [self.vocab.get_token_from_index(x, namespace="labels")
-                  for x in argmax_indices]
-        output_dict['label'] = labels
+        # TODO: compute predictions
+        # things that might be useful:
+        #    * tensor.cpu().data.numpy()  (get data from a variable to numpy array)
+        #    * numpy.argmax
+
+        # TODO: find predicted label[s]
+        # things that might be useful:
+        #    * self.vocab.get_token_from_index  (make sure to specify a namespace)
         return output_dict
 
     @overrides
