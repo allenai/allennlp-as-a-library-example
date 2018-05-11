@@ -27,7 +27,7 @@
       "input_dim": 4,
       "num_layers": 2,
       "hidden_dims": [2, 3],
-      "activations": ["relu", "linear"],
+      "activations": ["sigmoid", "linear"],
       "dropout": [0.2, 0.0]
     }
   },
