@@ -59,7 +59,11 @@ class SemanticScholarDatasetReader(DatasetReader):
             logger.info("Reading instances from lines in file at: %s", file_path)
             for line in data_file:
                 # TODO: Create and yield an Instance
-                raise NotImplementedError
+                # idea:
+                # * parse line as JSON
+                # * extract the fields
+                # * call text_to_instance
+                yield instance
 
     @overrides
     def text_to_instance(self, title: str, abstract: str, venue: str = None) -> Instance:  # type: ignore
@@ -67,8 +71,16 @@ class SemanticScholarDatasetReader(DatasetReader):
         tokenized_title = self._tokenizer.tokenize(title)
         tokenized_abstract = self._tokenizer.tokenize(abstract)
 
+        # TODO: create the Fields:
+        # recall:
+        # * "title" => TextField
+        # * "abstract" => TextField
+        # * "label" => LabelField (if provided!)
+
         # TODO: create the Instance:
-        raise NotImplementedError
+        # recall: Instance constructor takes a dict
+        # {"field_name": field}
+        return instance
 
     @classmethod
     def from_params(cls, params: Params) -> 'SemanticScholarDatasetReader':
