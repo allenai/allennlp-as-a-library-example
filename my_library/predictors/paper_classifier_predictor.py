@@ -11,13 +11,16 @@ class PaperClassifierPredictor(Predictor):
     """"Predictor wrapper for the AcademicPaperClassifier"""
     @overrides
     def _json_to_instance(self, json_dict: JsonDict) -> Tuple[Instance, JsonDict]:
-        title = json_dict['title']
-        abstract = json_dict['paperAbstract']
-        instance = self._dataset_reader.text_to_instance(title=title, abstract=abstract)
+        # TODO: get title and abstract out of json_dict
 
-        # label_dict will be like {0: "ACL", 1: "AI", ...}
-        label_dict = self._model.vocab.get_index_to_token_vocabulary('labels')
-        # Convert it to list ["ACL", "AI", ...]
-        all_labels = [label_dict[i] for i in range(len(label_dict))]
+        # TODO: create an instance
+        # thing that might be useful:
+        #  * self._dataset_reader.text_to_instance
 
+        # TODO: get the mapping label_id -> label_name
+        # thing that might be useful:
+        #  * self._model.vocab.get_index_to_token_vocabulary
+
+        # TODO: convert it to a list of label_names all_labels
+        # [label0_name, label1_name, label2_name]
         return instance, {"all_labels": all_labels}
