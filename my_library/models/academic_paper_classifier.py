@@ -142,6 +142,7 @@ class AcademicPaperClassifier(Model):
 
         # TODO: find predicted label[s]
         # things that might be useful:
+        #    * a list comprehension
         #    * self.vocab.get_token_from_index  (make sure to specify a namespace)
         return output_dict
 
