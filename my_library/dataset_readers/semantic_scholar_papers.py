@@ -60,7 +60,7 @@ class SemanticScholarDatasetReader(DatasetReader):
             for line in data_file:
                 # TODO: Create and yield an Instance
                 # idea:
-                # * parse line as JSON
+                # * parse line as JSON (don't forget the key is "paperAbstract")
                 # * extract the fields
                 # * call text_to_instance
                 yield instance
@@ -79,7 +79,7 @@ class SemanticScholarDatasetReader(DatasetReader):
 
         # TODO: create the Instance:
         # recall: Instance constructor takes a dict
-        # {"field_name": field}
+        #   {field_name: field}
         return instance
 
     @classmethod

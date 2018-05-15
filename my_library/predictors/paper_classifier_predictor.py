@@ -12,6 +12,7 @@ class PaperClassifierPredictor(Predictor):
     @overrides
     def _json_to_instance(self, json_dict: JsonDict) -> Tuple[Instance, JsonDict]:
         # TODO: get title and abstract out of json_dict
+        # don't forget the key is "paperAbstract"
 
         # TODO: create an instance
         # thing that might be useful:

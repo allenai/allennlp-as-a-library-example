@@ -131,17 +131,20 @@ class AcademicPaperClassifier(Model):
         Does a simple argmax over the class probabilities, converts indices to string labels, and
         adds a ``"label"`` key to the dictionary with the result.
         """
-        # TODO: compute class probabilities and add them as "class_probabilities"
+        # TODO: compute class probabilities and add them to output_dict as "class_probabilities"
         # things that might be useful:
-        #    * F.softmax (make sure to specify which dim to softmax along)
+        #    * the "logits" in the output dict
+        #    * F.softmax (make sure to specify which dim to softmax along,
+        #                 the logits have shape (batch_size, num_classes))
 
         # TODO: compute predictions
         # things that might be useful:
         #    * tensor.cpu().data.numpy()  (get data from a variable to numpy array)
-        #    * numpy.argmax
+        #    * numpy.argmax (make sure to specify which axis to argmax along)
 
         # TODO: find predicted label[s] and add them as "label"
         # things that might be useful:
+        #    * the array of predictions we just computed
         #    * a list comprehension
         #    * self.vocab.get_token_from_index  (make sure to specify a namespace)
         return output_dict
