@@ -1,6 +1,6 @@
 A simple example for how to build your own model using AllenNLP as a dependency.  An explanation
-of all of the code in this repository is given in an [AllenNLP
-tutorial](https://github.com/allenai/allennlp/blob/master/tutorials/getting_started/using_in_your_repo.md).
+of all of the code in this repository is given in the [part 1](https://github.com/allenai/allennlp/blob/master/tutorials/getting_started/using_as_a_library_pt1.md) and [part 2](https://github.com/allenai/allennlp/blob/master/tutorials/getting_started/using_as_a_library_pt2.md) of the AllenNLP
+tutorial.
 
 There are two main pieces of code you need to write in order to make a new model: a
 `DatasetReader` and a `Model`.  In this repository, we constructed a `DatasetReader` for reading
