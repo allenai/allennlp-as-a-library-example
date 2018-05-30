@@ -14,7 +14,7 @@ To train this model, after setting up your development environment by running
 `pip install -r requirements.txt`, you run:
 
 ```bash
-python -m allennlp.run train experiments/venue_classifier.json -s /tmp/your_output_dir_here --include-package my_library
+allennlp train experiments/venue_classifier.json -s /tmp/your_output_dir_here --include-package my_library
 ```
 
 This example was written by the AllenNLP team.  You can see a similar example repository written
