@@ -80,11 +80,3 @@ class SemanticScholarDatasetReader(DatasetReader):
         if venue is not None:
             fields['label'] = LabelField(venue)
         return Instance(fields)
-
-    @classmethod
-    def from_params(cls, params: Params) -> 'SemanticScholarDatasetReader':
-        lazy = params.pop('lazy', False)
-        tokenizer = Tokenizer.from_params(params.pop('tokenizer', {}))
-        token_indexers = TokenIndexer.dict_from_params(params.pop('token_indexers', {}))
-        params.assert_empty(cls.__name__)
-        return cls(lazy=lazy, tokenizer=tokenizer, token_indexers=token_indexers)

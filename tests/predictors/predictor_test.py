@@ -3,7 +3,7 @@ from unittest import TestCase
 
 from pytest import approx
 from allennlp.models.archival import load_archive
-from allennlp.service.predictors import Predictor
+from allennlp.predictors import Predictor
 
 # required so that our custom model + predictor + dataset reader
 # will be registered by name
