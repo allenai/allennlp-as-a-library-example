@@ -7,10 +7,12 @@
   "model": {
     "type": "paper_classifier",
     "text_field_embedder": {
-      "tokens": {
-        "type": "embedding",
-        "embedding_dim": 2,
-        "trainable": false
+      "token_embedders": {
+        "tokens": {
+          "type": "embedding",
+          "embedding_dim": 2,
+          "trainable": false
+        }
       }
     },
     "title_encoder": {
