@@ -1,4 +1,4 @@
-allennlp==0.7.0
+allennlp==0.7.1
 pytest-pythonpath
 
 # Checks style, syntax, and other useful errors.
