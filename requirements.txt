@@ -1,3 +1,12 @@
 allennlp==0.6.1
-pytest
 pytest-pythonpath
+
+# Checks style, syntax, and other useful errors.
+pylint==1.8.1
+
+# Static type checking
+mypy==0.521
+
+# Coverage reports
+pytest-cov
+codecov

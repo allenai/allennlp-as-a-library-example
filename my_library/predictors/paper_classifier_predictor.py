@@ -1,5 +1,3 @@
-from typing import Tuple
-
 from overrides import overrides
 
 from allennlp.common.util import JsonDict
