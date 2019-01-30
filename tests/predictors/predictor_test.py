@@ -31,7 +31,9 @@ class TestPaperClassifierPredictor(TestCase):
         result = predictor.predict_json(inputs)
 
         label = result.get("label")
-        assert label in ['AI', 'ML', 'ACL']
+        assert label in {'AI', 'ML', 'ACL'}
+        all_labels = result.get("all_labels")
+        assert all_labels == ['AI', 'ACL', 'ML']
 
         class_probabilities = result.get("class_probabilities")
         assert class_probabilities is not None
